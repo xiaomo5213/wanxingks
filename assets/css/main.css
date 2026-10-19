@@ -762,7 +762,132 @@ button, a, select, input { touch-action: manipulation; }
 .hero-progress-text { display: flex; flex-direction: column; gap: 2px; font-size: 11px; color: var(--muted); }
 .hero-progress-text b { font-size: 13px; font-weight: 600; color: var(--ink); }
 
-/* ---------- 8. 首页 · 年份与试卷 ---------- */
+/* ---------- 8. 首页 · 做题方法 ---------- */
+.method { position: relative; }
+
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.method-card {
+  position: relative;
+  padding: 16px 16px 15px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--panel);
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.method-card:hover {
+  border-color: var(--line-2);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+.method-no {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .12em;
+  color: var(--accent);
+}
+.method-card h3 {
+  margin: 8px 0 6px;
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.method-card p {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.method-card p b { color: var(--ink-2); font-weight: 500; }
+
+.method-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.method-panel {
+  padding: 16px 18px 14px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--panel-2);
+}
+.method-panel h3 {
+  margin-bottom: 8px;
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.method-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.method-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 11px;
+  line-height: 1.5;
+}
+.method-list b { color: var(--ink-2); font-weight: 500; }
+.method-list span { color: var(--accent); white-space: nowrap; }
+
+.method-traps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.method-traps li {
+  padding: 5px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.method-traps li:last-child { border-bottom: 0; }
+.method-traps b { color: var(--ink); font-weight: 500; }
+
+.method-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 12px;
+  padding: 14px 18px;
+  border: 1px solid var(--accent-line);
+  border-radius: 13px;
+  background: var(--accent-wash);
+}
+.method-cta b {
+  display: block;
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 600;
+}
+.method-cta span {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.method-cta .btn { flex: none; }
+
+/* ---------- 9. 首页 · 年份与试卷 ---------- */
 .section-head {
   display: flex;
   align-items: flex-end;
@@ -1550,6 +1675,7 @@ mark { padding: 0 2px; border-radius: 2px; background: var(--accent-wash); color
   .hero-card { max-width: 540px; }
   .year-block { grid-template-columns: 70px minmax(0, 1fr); gap: 22px; }
   .dist { grid-template-columns: 1fr; }
+  .method-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 1024px) {
@@ -1629,6 +1755,11 @@ mark { padding: 0 2px; border-radius: 2px; background: var(--accent-wash); color
   }
   .tip .icon { margin-top: 2px; }
 
+  .method-panels { grid-template-columns: 1fr; }
+  .method-list { grid-template-columns: 1fr; }
+  .method-cta { flex-direction: column; align-items: stretch; }
+  .method-cta .btn { width: 100%; }
+
   .section-head { margin-top: 42px; }
   .section-head p { display: none; }
 
@@ -1674,6 +1805,8 @@ mark { padding: 0 2px; border-radius: 2px; background: var(--accent-wash); color
   .hero-actions .btn { width: 100%; }
   .hero-actions .btn-primary { justify-content: space-between; }
   .dist-row { grid-template-columns: 84px minmax(0, 1fr) 30px; gap: 10px; }
+  .method-grid { grid-template-columns: 1fr; }
+  .method-card { padding: 14px 15px; }
 }
 
 @media (hover: none) {

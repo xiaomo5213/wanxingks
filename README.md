@@ -12,6 +12,7 @@
 
 - **点击揭示**：每个考点答案默认隐藏，点击挖空处显示；再次点击可收起。键盘 `Tab` + `Enter` / `Space` 同样可用。
 - **单词发音**：原词与答案词均配有喇叭按钮，调用 Edge TTS 在线合成；支持 6 种英文音色、4 档语速，可开启「揭示答案后自动发音」。
+- **做题方法**：首页内置四步法、空格定位速查、易错点与高频词族，并提供一页 A4 速查表 PDF 下载。
 - **全库检索**：支持英文原词、答案、词性、中文释义、考期与变化类型（如「过去分词」「名词化」「否定前缀」）；输入时可即时预览结果。
 - **随机自测**：从 261 个考点中随机抽题，先回想再揭示，可连续刷题。
 - **学习进度**：按试卷记录已揭示数量，总进度显示在侧栏，保存在浏览器 `localStorage`，不上传服务器；支持单卷重来与全部清除。
@@ -27,10 +28,22 @@
 │   ├── js/app.js              # 交互逻辑（路由、检索、自测、进度、TTS）
 │   ├── js/data.js             # 由 DOCX 生成的题库数据
 │   └── favicon.svg
+├── flashcards/                # 填词补文 120 词闪卡（独立小站）
+│   ├── index.html
+│   ├── assets/                # 闪卡样式、脚本、TTS
+│   └── data/words.js          # 120 词数据
 ├── source/
 │   └── 真题完形补文词汇总表.docx   # 原始文档（数据源）
 ├── scripts/
-│   └── build_data.py          # DOCX → assets/js/data.js
+│   ├── build_data.py          # DOCX → assets/js/data.js
+│   ├── build_vocab_book.py    # 生成按考期的 PDF/DOCX 词汇总表
+│   └── build_repeat_report.py # 生成历年重复单词 Excel
+├── reports/
+│   ├── 真题完形补文词汇总表-按考期.pdf
+│   ├── 真题完形补文词汇总表-按考期.docx
+│   ├── 历年重复单词汇总.xlsx
+│   └── cheatsheet.html        # 一页速查表源文件
+├── 完形补文做题技巧-一页速查.pdf   # 首页“下载 PDF”指向此文件
 ├── preview-home.png
 ├── preview-paper.png
 ├── preview-voice.png
@@ -50,6 +63,10 @@ python -m http.server 8000
 ```
 
 ## 部署到 GitHub Pages
+
+> **网页上传**：打开本文件夹，按 `Ctrl+A` 选中里面的**所有文件和文件夹**，再整体拖进 GitHub 的 Upload files 上传框。不要把最外层的“完形单词在线练习”文件夹本身拖进去，否则站点会多一层目录。
+>
+> 必须包含 `assets/`、`flashcards/` 和根目录的 `完形补文做题技巧-一页速查.pdf`；缺 `assets/` 会变成无样式裸页面，缺 PDF 则首页下载按钮 404。
 
 在项目目录执行：
 
@@ -73,6 +90,14 @@ git push -u origin main
 > 仓库名若为 `<用户名>.github.io`，地址则是 `https://<用户名>.github.io/`。
 
 本站是纯静态页面，无需 Actions、无需构建。`.nojekyll` 已包含，避免下划线文件被 Jekyll 忽略。
+
+> **上传注意**：用 GitHub 网页上传时，必须把 `assets/` 整个文件夹一起上传（包含 `css/main.css`、`js/app.js`、`js/data.js`、`favicon.svg`），同时上传 `flashcards/` 目录。只上传根目录文件会导致 CSS/JS 404，页面显示为无样式的裸 HTML。
+>
+> 自检：部署后直接打开 `/assets/css/main.css`、`/assets/js/data.js` 和 `/flashcards/`，应能正常访问；若返回 404，说明对应目录没有传到仓库根目录。
+>
+> `source/` 决定“下载原始 DOCX”链接是否可用，`scripts/` 仅用于以后重新生成题库；两者不影响页面显示，但建议一并上传。
+>
+> 首页“做题方法”里的“下载 PDF”指向根目录的 `完形补文做题技巧-一页速查.pdf`，上传时不要漏掉这个文件。
 
 也可以部署到 Gitee Pages、Cloudflare Pages、Netlify、Vercel 等任意静态托管：构建命令留空，发布目录选择仓库根目录即可。
 
@@ -135,10 +160,19 @@ python scripts/build_data.py "source/真题完形补文词汇总表.docx"
 - 2018 年 10 月为《Keeping Friendship Alive》，与 2018 年 4 月的《Workplace English Learning》为两套不同内容。
 - 2018 年 10 月按原文 41–50 题提取；文首 `(friend)` 是示例（`friends` 已给出），不计入 10 个考点。
 
+## 配套：填词补文 120 词闪卡
+
+`flashcards/` 是本库配套的另一个小站：把《填词补文 5 天刷题计划》里的 120 个高频词做成可翻面的快刷闪卡，支持按天分组、中英互测、错词重刷、真题例句、发音与本地进度。
+
+- 入口：`flashcards/index.html`（首页侧栏「词汇闪卡」也可进入）
+- 部署后的地址：`https://<用户名>.github.io/<仓库名>/flashcards/`
+- 数据与页面分离，改词只动 `flashcards/data/words.js`
+- 发音同样走 Edge TTS（`assets/tts.js`），手机 / 微信内可播，首次点一下喇叭解锁
+- 详细说明见 [`flashcards/README.md`](flashcards/README.md)
+
 ## 说明
 
-- 学习进度为浏览器本地数据，换设备或清除缓存后不会保留；「重新开始」只清除当前试卷，「清除全部学习记录」会清零所有进度。
-- 2018 年 10 月的题目已更正，站点首次加载新版本时会清空该卷旧进度，其他试卷进度不受影响。
+- 学习进度为浏览器本地数据，换设备或清除缓存后不会保留；「重新开始」只清除当前试卷，「清除全部学习记录」会清零所有进度。- 2018 年 10 月的题目已更正，站点首次加载新版本时会清空该卷旧进度，其他试卷进度不受影响。
 - 文字内容可离线浏览；单词发音由 Edge TTS 在线合成，需要联网，接口不可用时会以提示条告知。
 - 页面无第三方统计、无外部字体请求。
 - 建议使用较新的 Chrome / Edge / Safari / Firefox；微信内置浏览器可直接打开。

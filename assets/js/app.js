@@ -701,6 +701,74 @@
         </aside>
       </section>
 
+      <section class="method" id="method" aria-labelledby="methodTitle">
+        <div class="section-head">
+          <h2 id="methodTitle">做题方法 <small>HOW TO SOLVE</small></h2>
+          <p>四步定位 · 三查收尾</p>
+        </div>
+
+        <div class="method-grid">
+          <article class="method-card">
+            <span class="method-no">01</span>
+            <h3>定时态语态</h3>
+            <p>先圈 <b>have / be / will / ago / now / since</b>，判断主动还是被动、现在还是过去。</p>
+          </article>
+          <article class="method-card">
+            <span class="method-no">02</span>
+            <h3>看前后定词性</h3>
+            <p>冠词、介词后多为名词；名词前多为形容词；动词、形容词、句首多为副词。</p>
+          </article>
+          <article class="method-card">
+            <span class="method-no">03</span>
+            <h3>定具体形式</h3>
+            <p>时态、语态、单复数、比较级、否定前缀；一个空只改一个核心形式。</p>
+          </article>
+          <article class="method-card">
+            <span class="method-no">04</span>
+            <h3>拼写回读</h3>
+            <p>双写、y→i、去 e、句首大写；把答案放回原句读一遍，语法语义都通才保留。</p>
+          </article>
+        </div>
+
+        <div class="method-panels">
+          <div class="method-panel">
+            <h3>空格定位速查</h3>
+            <ul class="method-list">
+              <li><b>冠词 / 介词后</b><span>名词</span></li>
+              <li><b>名词前</b><span>形容词</span></li>
+              <li><b>be 后</b><span>形容词 / 分词</span></li>
+              <li><b>have / has / had 后</b><span>过去分词</span></li>
+              <li><b>动词 / 句首</b><span>副词</span></li>
+              <li><b>主语后</b><span>谓语动词</span></li>
+              <li><b>than</b><span>比较级</span></li>
+              <li><b>these / many</b><span>复数名词</span></li>
+            </ul>
+          </div>
+          <div class="method-panel">
+            <h3>最容易错的 6 组</h3>
+            <ul class="method-traps">
+              <li><b>interested / interesting</b>：人感到 / 物令人</li>
+              <li><b>hard / hardly</b>：努力、猛烈 / 几乎不</li>
+              <li><b>true → truth</b>；wide → width</li>
+              <li><b>explain → explanation</b>；decide → decision</li>
+              <li><b>succeed → success → successful</b></li>
+              <li><b>effect（名词） / affect（动词）</b></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="method-cta">
+          <div>
+            <b>一页 A4 速查表</b>
+            <span>四步法 · 空格定位 · 词形后缀 · 高频词族 · 易错点</span>
+          </div>
+          <a class="btn btn-primary btn-sm" href="完形补文做题技巧-一页速查.pdf" download>
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-down"></use></svg>
+            下载 PDF
+          </a>
+        </div>
+      </section>
+
       <div class="section-head">
         <h2>藏卷 <small>THE COLLECTION</small></h2>
         <p>按年份排列 · 共 ${PAPERS.length} 套</p>

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>完形补文做题技巧 · 一页速查</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    width: 210mm;
+    height: 297mm;
+    padding: 9mm 11mm 7mm;
+    display: flex;
+    flex-direction: column;
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    color: #211f1b;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    overflow: hidden;
+  }
+  :root {
+    --accent: #a8432c;
+    --ink: #211f1b;
+    --ink-2: #4b463d;
+    --muted: #7a7266;
+    --line: #e3dac8;
+    --cream: #fbf6ec;
+    --green: #3c5f4d;
+  }
+
+  /* ---------- header ---------- */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 8mm;
+    padding-bottom: 3.2mm;
+    border-bottom: 1.2pt solid var(--accent);
+  }
+  .eyebrow {
+    font-size: 7.2pt;
+    letter-spacing: .16em;
+    color: var(--muted);
+    margin-bottom: 1.6mm;
+  }
+  h1 {
+    margin: 0;
+    font-family: "Songti SC", "SimSun", "STSong", serif;
+    font-size: 21pt;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: .02em;
+  }
+  h1 em { font-style: normal; color: var(--accent); }
+  .sub {
+    margin: 1.8mm 0 0;
+    font-size: 8pt;
+    color: var(--ink-2);
+    letter-spacing: .04em;
+  }
+  .head-right { display: flex; align-items: center; gap: 4mm; flex: none; }
+  .stats {
+    text-align: right;
+    font-size: 7pt;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .stats b { display: block; font-family: Georgia, serif; font-size: 15pt; color: var(--ink); font-weight: 700; line-height: 1.1; }
+  .seal {
+    width: 14mm;
+    height: 14mm;
+    border-radius: 2.6mm;
+    background: var(--accent);
+    color: #fff8f1;
+    display: grid;
+    place-items: center;
+    font-family: "Songti SC", "SimSun", serif;
+    font-size: 18pt;
+    line-height: 1;
+    box-shadow: inset 0 0 0 .4mm rgba(255,255,255,.25);
+  }
+
+  /* ---------- main ---------- */
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7mm;
+    padding-top: 3.2mm;
+    min-height: 0;
+  }
+  .col { min-width: 0; }
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+    margin: 3.2mm 0 1.6mm;
+    font-family: "Songti SC", "SimSun", serif;
+    font-size: 10.8pt;
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  h2:first-child { margin-top: 0; }
+  h2 .no {
+    display: inline-grid;
+    place-items: center;
+    width: 4.6mm;
+    height: 4.6mm;
+    border-radius: 1mm;
+    background: var(--accent);
+    color: #fff;
+    font: 700 6.2pt/1 "Consolas", monospace;
+    flex: none;
+  }
+
+  /* ---------- steps ---------- */
+  .steps { margin: 0; padding: 0; list-style: none; }
+  .steps li {
+    display: grid;
+    grid-template-columns: 5.2mm 1fr;
+    gap: 1.6mm;
+    padding: 1.35mm 0;
+    border-bottom: .4pt dashed var(--line);
+  }
+  .steps li:last-child { border-bottom: 0; }
+  .steps .n {
+    font: 700 7pt/1.5 "Consolas", monospace;
+    color: var(--accent);
+    padding-top: .3mm;
+  }
+  .steps b { display: block; font-size: 8.6pt; font-weight: 700; margin-bottom: .5mm; }
+  .steps p { margin: 0; font-size: 7.6pt; line-height: 1.45; color: var(--ink-2); }
+
+  /* ---------- tables ---------- */
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; vertical-align: top; }
+  .lookup th {
+    padding: .8mm 0 1.2mm;
+    font-size: 6.6pt;
+    font-weight: 600;
+    letter-spacing: .08em;
+    color: var(--muted);
+    border-bottom: .8pt solid var(--accent);
+  }
+  .lookup td {
+    padding: 1.05mm 0;
+    border-bottom: .4pt dashed var(--line);
+    font-size: 7.5pt;
+    line-height: 1.35;
+  }
+  .lookup td:first-child { width: 44%; color: var(--ink); font-weight: 600; }
+  .lookup td:last-child { color: var(--accent); }
+  .lookup tr:last-child td { border-bottom: 0; }
+
+  /* ---------- checks ---------- */
+  .checks {
+    display: flex;
+    gap: 2mm;
+    margin-top: 2.4mm;
+  }
+  .checks span {
+    flex: 1;
+    padding: 1.4mm 1.8mm;
+    border: .5pt solid var(--line);
+    border-radius: 1.4mm;
+    background: var(--cream);
+    font-size: 7.4pt;
+    text-align: center;
+    color: var(--ink-2);
+  }
+  .checks b { color: var(--accent); font-weight: 700; }
+  .time-note {
+    margin-top: 1.8mm;
+    font-size: 7pt;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .time-note b { color: var(--ink-2); font-weight: 600; }
+
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2mm;
+    margin-top: 1.6mm;
+  }
+  .flow div {
+    padding: 1.5mm 1.8mm;
+    border: .5pt solid var(--line);
+    border-radius: 1.2mm;
+    background: var(--cream);
+  }
+  .flow b { display: block; font-size: 8pt; color: var(--ink); }
+  .flow span { display: block; margin-top: .3mm; font-size: 6.8pt; color: var(--muted); }
+  .flow-note {
+    margin: 1.4mm 0 0;
+    font-size: 6.9pt;
+    line-height: 1.45;
+    color: var(--muted);
+  }
+  .flow-note b { color: var(--accent); font-weight: 600; }
+
+  .practice { margin: 0; padding: 0; list-style: none; }
+  .practice li {
+    position: relative;
+    padding: 1.1mm 0 1.1mm 3mm;
+    border-bottom: .4pt dashed var(--line);
+    font-size: 7.4pt;
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+  .practice li:last-child { border-bottom: 0; }
+  .practice li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2mm;
+    width: 1.2mm;
+    height: 1.2mm;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .practice b { color: var(--ink); font-weight: 600; }
+
+  .example-table { margin-top: .6mm; }
+  .example-table th {
+    padding: .6mm 0 1mm;
+    font-size: 6.4pt;
+    font-weight: 600;
+    letter-spacing: .06em;
+    color: var(--muted);
+    border-bottom: .8pt solid var(--accent);
+  }
+  .example-table td {
+    padding: .95mm 0;
+    border-bottom: .4pt dashed var(--line);
+    font-size: 7.1pt;
+    line-height: 1.3;
+    vertical-align: top;
+  }
+  .example-table td:first-child { width: 38%; color: var(--ink-2); }
+  .example-table td:nth-child(2) { width: 20%; }
+  .example-table td:last-child { width: 42%; color: var(--muted); }
+  .example-table em {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: normal;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .example-table tr:last-child td { border-bottom: 0; }
+
+  .structures {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 4mm;
+    margin-top: .8mm;
+  }
+  .structures span {
+    display: block;
+    padding: .7mm 0;
+    border-bottom: .3pt dotted var(--line);
+    font-size: 7pt;
+    line-height: 1.35;
+    color: var(--muted);
+  }
+  .structures b { color: var(--green); font-weight: 600; }
+
+  /* ---------- forms table ---------- */
+  .forms td {
+    padding: 1.1mm 0;
+    border-bottom: .4pt dashed var(--line);
+    font-size: 7.5pt;
+    line-height: 1.4;
+  }
+  .forms td:first-child {
+    width: 22%;
+    color: var(--green);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .forms tr:last-child td { border-bottom: 0; }
+  .mini { color: var(--muted); font-size: 6.8pt; font-weight: 400; }
+
+  /* ---------- traps ---------- */
+  .traps { margin: 0; padding: 0; list-style: none; }
+  .traps li {
+    position: relative;
+    padding: 1.05mm 0 1.05mm 3.2mm;
+    border-bottom: .4pt dashed var(--line);
+    font-size: 7.4pt;
+    line-height: 1.4;
+    color: var(--ink-2);
+  }
+  .traps li:last-child { border-bottom: 0; }
+  .traps li::before {
+    content: "×";
+    position: absolute;
+    left: 0;
+    top: 1mm;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 7.4pt;
+  }
+  .traps b { color: var(--ink); font-weight: 700; }
+
+  /* ---------- families ---------- */
+  .families {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 4mm;
+    margin-top: .6mm;
+  }
+  .families span {
+    display: block;
+    padding: .75mm 0;
+    font-size: 7.1pt;
+    line-height: 1.3;
+    color: var(--ink-2);
+    border-bottom: .3pt dotted var(--line);
+  }
+  .families b { color: var(--green); font-weight: 600; }
+
+  /* ---------- motto ---------- */
+  .motto {
+    margin-top: 2.6mm;
+    padding: 2.2mm 2.8mm;
+    border-left: 1.4mm solid var(--accent);
+    background: var(--cream);
+    font-size: 8.4pt;
+    line-height: 1.55;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .motto span { color: var(--accent); }
+
+  /* ---------- examples ---------- */
+  .examples {
+    margin-top: 2.8mm;
+    padding: 2.2mm 3mm;
+    border: .5pt solid var(--line);
+    border-radius: 1.6mm;
+    background: #fffdf8;
+  }
+  .examples h3 {
+    margin: 0 0 1.2mm;
+    font-family: "Songti SC", "SimSun", serif;
+    font-size: 8.2pt;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .examples p {
+    margin: 0;
+    font-size: 7.1pt;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .examples b { color: var(--ink-2); font-weight: 600; }
+  .examples em { font-family: Georgia, serif; font-style: normal; color: var(--accent); font-weight: 700; }
+
+  /* ---------- footer ---------- */
+  footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 6mm;
+    margin-top: 2.4mm;
+    padding-top: 1.6mm;
+    border-top: .5pt solid var(--line);
+    font-size: 6.6pt;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  footer b { color: var(--ink-2); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="eyebrow">自考英语（专升本） · 完形补文</div>
+    <h1>做题技巧 <em>一页速查</em></h1>
+    <p class="sub">四步定位 · 三查收尾 · 10 个空建议 10–12 分钟</p>
+  </div>
+  <div class="head-right">
+    <div class="stats">
+      <b>26</b>
+      套真题 · 261 个考点
+    </div>
+    <div class="seal">文</div>
+  </div>
+</header>
+
+<main>
+  <section class="col">
+    <h2><span class="no">01</span>四步法</h2>
+    <ol class="steps">
+      <li>
+        <span class="n">1</span>
+        <div><b>定时态语态</b><p>圈出 have/be/will/ago/now/since，先判断主动还是被动、现在还是过去。</p></div>
+      </li>
+      <li>
+        <span class="n">2</span>
+        <div><b>看前后定词性</b><p>冠词、介词后多为名词；名词前多为形容词；动词、形容词、句首多为副词。</p></div>
+      </li>
+      <li>
+        <span class="n">3</span>
+        <div><b>定具体形式</b><p>时态、语态、单复数、比较级、否定前缀；一个空只改一个核心形式。</p></div>
+      </li>
+      <li>
+        <span class="n">4</span>
+        <div><b>拼写回读</b><p>双写、y→i、去 e、句首大写；把答案放回原句读一遍，语法语义都通才保留。</p></div>
+      </li>
+    </ol>
+
+    <h2><span class="no">02</span>空格定位速查</h2>
+    <table class="lookup">
+      <thead><tr><th>空格信号</th><th>通常填</th></tr></thead>
+      <tbody>
+        <tr><td>冠词 / 物主 / 介词后</td><td>名词</td></tr>
+        <tr><td>名词前</td><td>形容词</td></tr>
+        <tr><td>be 动词后</td><td>形容词 / 分词</td></tr>
+        <tr><td>have / has / had 后</td><td>过去分词</td></tr>
+        <tr><td>实义动词 / 形容词 / 句首</td><td>副词</td></tr>
+        <tr><td>主语后、谓语位置</td><td>动词（时态 / 三单）</td></tr>
+        <tr><td>介词 / while / after / before</td><td>动名词 / 现在分词</td></tr>
+        <tr><td>many / these / several</td><td>复数名词</td></tr>
+        <tr><td>than</td><td>比较级</td></tr>
+        <tr><td>and / or 并列</td><td>同词性、同形式</td></tr>
+      </tbody>
+    </table>
+
+    <div class="checks">
+      <span><b>词性</b> 对不对</span>
+      <span><b>形式</b> 对不对</span>
+      <span><b>拼写</b> 对不对</span>
+    </div>
+
+    <h2><span class="no">03</span>考场顺序</h2>
+    <div class="flow">
+      <div><b>通读</b><span>1–2 分钟</span></div>
+      <div><b>填写</b><span>7–8 分钟</span></div>
+      <div><b>检查</b><span>1–2 分钟</span></div>
+    </div>
+    <p class="flow-note"><b>不空题：</b>不会的先标记，最后回来补齐；句首记得大写。</p>
+    <h2><span class="no">04</span>真题示例</h2>
+    <table class="example-table">
+      <thead><tr><th>线索</th><th>答案</th><th>判断</th></tr></thead>
+      <tbody>
+        <tr><td>a (comfort) pair</td><td><em>comfortable</em></td><td>冠词 + 名词前 → 形容词</td></tr>
+        <tr><td>busyness and (familiar)</td><td><em>familiarity</em></td><td>and 并列 → 名词</td></tr>
+        <tr><td>need to be (renew)</td><td><em>renewed</em></td><td>be + 过去分词，被动</td></tr>
+        <tr><td>alive and (health)</td><td><em>healthy</em></td><td>and 并列 → 形容词</td></tr>
+        <tr><td>(Probable) it will help</td><td><em>Probably</em></td><td>句首 → 副词，大写</td></tr>
+        <tr><td>haven't (call) up</td><td><em>called</em></td><td>have + 过去分词</td></tr>
+        <tr><td>while (be) asked</td><td><em>being</em></td><td>while + 被动分词</td></tr>
+        <tr><td>are you (go) to</td><td><em>going</em></td><td>be going to</td></tr>
+        <tr><td>these (virtue)</td><td><em>virtues</em></td><td>these + 复数名词</td></tr>
+        <tr><td>and (honest)</td><td><em>honesty</em></td><td>and 并列 → 名词</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="col">
+    <h2><span class="no">05</span>词形变化</h2>
+    <table class="forms">
+      <tbody>
+        <tr><td>名词</td><td>-tion/-sion · -ment · -ness · -ity · -ance/-ence · -er/-or</td></tr>
+        <tr><td>形容词</td><td>-ful · -less · -ive · -able/-ible · -al · -ous · -ed/-ing</td></tr>
+        <tr><td>副词</td><td>-ly <span class="mini">（friendly / lovely / likely 是形容词）</span></td></tr>
+        <tr><td>动词</td><td>-en · en- · -ify · -ize <span class="mini">（deepen / enable）</span></td></tr>
+        <tr><td>否定</td><td>un- · in- · im- · ir- · il- · dis-</td></tr>
+        <tr><td>比较</td><td>-er / more；-est / most <span class="mini">（good / better / best 等不规则）</span></td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="no">06</span>最容易错的 8 组</h2>
+    <ul class="traps">
+      <li><b>interested / interesting</b>：人感到 / 物令人；surprised / surprising 同理。</li>
+      <li><b>hard / hardly</b>：努力、猛烈 / 几乎不；<b>near / nearly</b>：近的 / 将近。</li>
+      <li><b>true → truth</b>；wide → width；long → length；strong → strength。</li>
+      <li><b>explain → explanation</b>；decide → decision；describe → description。</li>
+      <li><b>succeed → success → successful → successfully</b>，四个词性别混。</li>
+      <li><b>effect（名词）/ affect（动词）</b>：have an effect on / affect sb。</li>
+      <li><b>able → ability / enable</b>；important ↔ importance 看空格方向。</li>
+      <li><b>use → used / using / uses</b>；used to do / be used to doing。</li>
+    </ul>
+
+    <h2><span class="no">07</span>高频词族</h2>
+    <div class="families">
+      <span><b>nature</b> / natural / naturally</span>
+      <span><b>use</b> / used / using</span>
+      <span><b>effect</b> / effective / effectively</span>
+      <span><b>real</b> / really</span>
+      <span><b>able</b> / enable / ability</span>
+      <span><b>help</b> / helps / helpful</span>
+      <span><b>important</b> / importance</span>
+      <span><b>different</b> / difference</span>
+      <span><b>success</b> / successful</span>
+      <span><b>possible</b> / impossible</span>
+      <span><b>correct</b> / incorrect</span>
+      <span><b>near</b> / nearly</span>
+      <span><b>probable</b> / probably</span>
+      <span><b>require</b> / requires</span>
+      <span><b>mistake</b> / mistakes</span>
+      <span><b>wise</b> / wisely</span>
+    </div>
+
+    <div class="motto">先定词性，再定形式，最后拼写；<span>回读一句，语法语义都对。</span></div>
+
+    <h2><span class="no">08</span>常见结构</h2>
+    <div class="structures">
+      <span><b>be + done</b> 被动</span>
+      <span><b>have + done</b> 完成</span>
+      <span><b>be + doing</b> 进行</span>
+      <span><b>while being done</b> 被动分词</span>
+      <span><b>be going to</b> 将来</span>
+      <span><b>one of the + 复数</b></span>
+      <span><b>look forward to doing</b></span>
+      <span><b>the + 比较级</b> 越…越…</span>
+    </div>
+
+    <h2><span class="no">09</span>训练建议</h2>
+    <ul class="practice">
+      <li><b>每天 1 套：</b>限时 10 分钟，先写后看答案。</li>
+      <li><b>错题四栏：</b>原词 / 我写的 / 正确形式 / 错因。</li>
+      <li><b>按标签补弱：</b>过去分词、名词化、否定前缀。</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <span><b>用法：</b>先遮住答案自测，再对照词性和释义；错题按“词性 / 形式 / 拼写”归类。</span>
+  <span>完整题库：26 套真题 · 261 个考点</span>
+</footer>
+
+</body>
+</html>
