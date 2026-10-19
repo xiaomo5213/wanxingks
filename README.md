@@ -28,10 +28,6 @@
 │   ├── js/app.js              # 交互逻辑（路由、检索、自测、进度、TTS）
 │   ├── js/data.js             # 由 DOCX 生成的题库数据
 │   └── favicon.svg
-├── flashcards/                # 填词补文 120 词闪卡（独立小站）
-│   ├── index.html
-│   ├── assets/                # 闪卡样式、脚本、TTS
-│   └── data/words.js          # 120 词数据
 ├── source/
 │   └── 真题完形补文词汇总表.docx   # 原始文档（数据源）
 ├── scripts/
@@ -66,7 +62,7 @@ python -m http.server 8000
 
 > **网页上传**：打开本文件夹，按 `Ctrl+A` 选中里面的**所有文件和文件夹**，再整体拖进 GitHub 的 Upload files 上传框。不要把最外层的“完形单词在线练习”文件夹本身拖进去，否则站点会多一层目录。
 >
-> 必须包含 `assets/`、`flashcards/` 和根目录的 `完形补文做题技巧-一页速查.pdf`；缺 `assets/` 会变成无样式裸页面，缺 PDF 则首页下载按钮 404。
+> 必须包含 `assets/` 和根目录的 `完形补文做题技巧-一页速查.pdf`；缺 `assets/` 会变成无样式裸页面，缺 PDF 则首页下载按钮 404。
 
 在项目目录执行：
 
@@ -91,9 +87,9 @@ git push -u origin main
 
 本站是纯静态页面，无需 Actions、无需构建。`.nojekyll` 已包含，避免下划线文件被 Jekyll 忽略。
 
-> **上传注意**：用 GitHub 网页上传时，必须把 `assets/` 整个文件夹一起上传（包含 `css/main.css`、`js/app.js`、`js/data.js`、`favicon.svg`），同时上传 `flashcards/` 目录。只上传根目录文件会导致 CSS/JS 404，页面显示为无样式的裸 HTML。
+> **上传注意**：用 GitHub 网页上传时，必须把 `assets/` 整个文件夹一起上传（包含 `css/main.css`、`js/app.js`、`js/data.js`、`favicon.svg`）。只上传根目录文件会导致 CSS/JS 404，页面显示为无样式的裸 HTML。
 >
-> 自检：部署后直接打开 `/assets/css/main.css`、`/assets/js/data.js` 和 `/flashcards/`，应能正常访问；若返回 404，说明对应目录没有传到仓库根目录。
+> 自检：部署后直接打开 `/assets/css/main.css` 和 `/assets/js/data.js`，应能看到文件内容；若返回 404，说明 `assets` 没有传到仓库根目录。
 >
 > `source/` 决定“下载原始 DOCX”链接是否可用，`scripts/` 仅用于以后重新生成题库；两者不影响页面显示，但建议一并上传。
 >
@@ -160,19 +156,10 @@ python scripts/build_data.py "source/真题完形补文词汇总表.docx"
 - 2018 年 10 月为《Keeping Friendship Alive》，与 2018 年 4 月的《Workplace English Learning》为两套不同内容。
 - 2018 年 10 月按原文 41–50 题提取；文首 `(friend)` 是示例（`friends` 已给出），不计入 10 个考点。
 
-## 配套：填词补文 120 词闪卡
-
-`flashcards/` 是本库配套的另一个小站：把《填词补文 5 天刷题计划》里的 120 个高频词做成可翻面的快刷闪卡，支持按天分组、中英互测、错词重刷、真题例句、发音与本地进度。
-
-- 入口：`flashcards/index.html`（首页侧栏「词汇闪卡」也可进入）
-- 部署后的地址：`https://<用户名>.github.io/<仓库名>/flashcards/`
-- 数据与页面分离，改词只动 `flashcards/data/words.js`
-- 发音同样走 Edge TTS（`assets/tts.js`），手机 / 微信内可播，首次点一下喇叭解锁
-- 详细说明见 [`flashcards/README.md`](flashcards/README.md)
-
 ## 说明
 
-- 学习进度为浏览器本地数据，换设备或清除缓存后不会保留；「重新开始」只清除当前试卷，「清除全部学习记录」会清零所有进度。- 2018 年 10 月的题目已更正，站点首次加载新版本时会清空该卷旧进度，其他试卷进度不受影响。
+- 学习进度为浏览器本地数据，换设备或清除缓存后不会保留；「重新开始」只清除当前试卷，「清除全部学习记录」会清零所有进度。
+- 2018 年 10 月的题目已更正，站点首次加载新版本时会清空该卷旧进度，其他试卷进度不受影响。
 - 文字内容可离线浏览；单词发音由 Edge TTS 在线合成，需要联网，接口不可用时会以提示条告知。
 - 页面无第三方统计、无外部字体请求。
 - 建议使用较新的 Chrome / Edge / Safari / Firefox；微信内置浏览器可直接打开。
