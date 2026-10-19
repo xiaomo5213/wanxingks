@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>真题完形补文词汇文库 · 自考英语（专升本）</title>
+<meta name="description" content="自考英语（专升本）历年真题完形补文词汇对照文库：收录 2013—2026 年 26 套真题、261 个考点。答案以挖空呈现，点击即可揭示，支持单词发音、检索、随机自测与学习进度记录。">
+<meta property="og:title" content="真题完形补文词汇文库">
+<meta property="og:description" content="2013—2026 年 26 套自考英语（专升本）真题，261 个完形补文考点。点击挖空揭示答案，支持单词发音、检索、自测与进度记录。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f4efe4">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/main.css">
+<script>
+  (function () {
+    try {
+      var raw = localStorage.getItem("cloze-library-v1");
+      var saved = raw ? JSON.parse(raw) : {};
+      var theme = saved.theme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.dataset.theme = theme;
+      document.querySelector('meta[name="theme-color"]').setAttribute("content", theme === "dark" ? "#131519" : "#f4efe4");
+    } catch (e) { /* 首次访问或隐私模式 */ }
+  })();
+</script>
+</head>
+<body>
+<a class="skip-link" href="#view" id="skipLink">跳到正文</a>
+<noscript><div class="noscript">本站的挖空揭示、检索与学习进度依赖 JavaScript，请启用后刷新页面。</div></noscript>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar" aria-label="文库目录">
+    <div class="brand">
+      <a class="brand-link" href="#/">
+        <span class="seal" aria-hidden="true">文</span>
+        <span class="brand-text">
+          <strong>完形文库</strong>
+          <small>CLOZE&nbsp;VOCABULARY&nbsp;ARCHIVE</small>
+        </span>
+      </a>
+    </div>
+
+    <div class="side-scroll">
+      <nav class="side-nav" aria-label="导航">
+        <a class="side-link" href="#/" data-nav="home">
+          <svg class="icon" aria-hidden="true"><use href="#i-book"></use></svg>
+          <span>馆藏总览</span>
+        </a>
+        <a class="side-link" href="#/quiz" data-nav="quiz">
+          <svg class="icon" aria-hidden="true"><use href="#i-shuffle"></use></svg>
+          <span>随机自测</span>
+        </a>
+        <a class="side-link" href="#/search" data-nav="search">
+          <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
+          <span>全库检索</span>
+        </a>
+
+        <div class="side-label">真题考期 <span id="paperCount">26</span></div>
+        <div id="paperNav" class="paper-nav"></div>
+      </nav>
+    </div>
+
+    <div class="side-foot">
+      <div class="side-progress-top">
+        <span>总进度</span>
+        <b id="overallPct">0%</b>
+      </div>
+      <div class="track"><div class="track-fill" id="overallFill" style="width:0%"></div></div>
+      <button class="text-btn" id="resetAll" type="button">清除全部学习记录</button>
+    </div>
+  </aside>
+
+  <div class="scrim" id="scrim" aria-hidden="true"></div>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="打开目录" aria-expanded="false" aria-controls="sidebar">
+        <svg class="icon" aria-hidden="true"><use href="#i-menu"></use></svg>
+      </button>
+
+      <a class="mini-brand" href="#/">
+        <span class="seal seal-sm" aria-hidden="true">文</span>
+        <span>完形文库</span>
+      </a>
+
+      <form class="search" id="globalSearch" role="search" autocomplete="off">
+        <svg class="icon search-icon" aria-hidden="true"><use href="#i-search"></use></svg>
+        <input id="globalSearchInput" type="search" placeholder="搜索单词、释义或考期…" aria-label="全库搜索" autocomplete="off" spellcheck="false">
+        <kbd aria-hidden="true">/</kbd>
+        <div class="search-pop" id="searchPop" hidden></div>
+      </form>
+
+      <div class="topbar-actions">
+        <div class="voice-wrap" id="voiceWrap">
+          <button class="icon-btn voice-btn" id="voiceBtn" type="button" aria-label="发音设置" aria-expanded="false" aria-controls="voicePop" title="发音设置">
+            <svg class="icon" aria-hidden="true"><use href="#i-volume"></use></svg>
+          </button>
+          <div class="voice-pop" id="voicePop" role="dialog" aria-label="发音设置" hidden>
+            <div class="voice-pop-head">
+              <strong>发音设置</strong>
+              <button class="mini-close" id="voiceClose" type="button" aria-label="关闭发音设置">
+                <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+              </button>
+            </div>
+            <label class="voice-field">
+              <span>音色</span>
+              <select id="voiceSelect">
+                <option value="en-US-JennyNeural">美式女声 · Jenny</option>
+                <option value="en-US-AriaNeural">美式女声 · Aria</option>
+                <option value="en-US-GuyNeural">美式男声 · Guy</option>
+                <option value="en-GB-SoniaNeural">英式女声 · Sonia</option>
+                <option value="en-GB-RyanNeural">英式男声 · Ryan</option>
+                <option value="en-AU-NatashaNeural">澳式女声 · Natasha</option>
+              </select>
+            </label>
+            <label class="voice-field">
+              <span>语速</span>
+              <select id="speedSelect">
+                <option value="0.8">0.8× · 慢速</option>
+                <option value="0.9">0.9× · 清晰</option>
+                <option value="1">1.0× · 正常</option>
+                <option value="1.1">1.1× · 稍快</option>
+              </select>
+            </label>
+            <label class="voice-switch">
+              <span>揭示答案后自动发音</span>
+              <input type="checkbox" id="autoSpeak">
+              <span class="switch-ui" aria-hidden="true"></span>
+            </label>
+            <button class="btn btn-ghost btn-sm voice-test" id="voiceTest" type="button">
+              <svg class="icon" aria-hidden="true"><use href="#i-volume"></use></svg>
+              试听 “vocabulary”
+            </button>
+            <p class="voice-note">由 Edge TTS 在线合成 · 微信 / iOS 首次播放请允许音频</p>
+          </div>
+        </div>
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="切换深色模式" title="切换深色模式">
+          <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"></use></svg>
+          <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"></use></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="view" id="view" tabindex="-1"></main>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<svg class="svg-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.6-3.6"></path></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"></path></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"></path></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2M12 19.5v2M4.3 4.3l1.4 1.4M18.3 18.3l1.4 1.4M2.5 12h2M19.5 12h2M4.3 19.7l1.4-1.4M18.3 5.7l1.4-1.4"></path></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.4 8.4 0 1 0 10.5 10.5Z"></path></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5Z"></path><path d="M4 5.5v16"></path><path d="M8 7h8"></path></symbol>
+  <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M17 4h4v4M21 4l-6.5 6.5M3 20l6-6M17 20h4v-4M21 20l-5-5M3 4l5 5"></path></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"></path></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></symbol>
+  <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><path d="M3 3v5h5"></path></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"></path></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"></path><circle cx="12" cy="12" r="3"></circle></symbol>
+  <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9.5v5h3.3L13 19V5L7.3 9.5H4Z"></path><path d="M16.4 8.6a4.9 4.9 0 0 1 0 6.8"></path><path d="M19 6a8.4 8.4 0 0 1 0 12"></path></symbol>
+</svg>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
